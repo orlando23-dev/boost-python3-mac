@@ -58,3 +58,33 @@ If you are building without `build.sh`, then you will additionally need to:
 
 + run `cmake -DBOOST_ROOT=xxx -DPYTHON_LIBRARY=xxx -DPYTHON_INCLUDE_DIR=xxx ..`
 + As of the time of this writing, the naming convention is that python2 is called "python" and python3 is called "python3" on the Apple platform. Therefore, in `CMakeLists.txt` verify that the line `FIND_PACKAGE(Boost COMPONENTS python)` is changed to `FIND_PACKAGE(Boost COMPONENTS python3)`.
+
+## 1. How make building 
+
++ pre-requsisite: https://stackoverflow.com/questions/42123509/cmake-finds-boost-but-the-imported-targets-not-available-for-boost-version
+update **cmake to 3.11.3** to avoid running issue: 
+
+Boost 1.63 requires CMake 3.7 or newer.
+Boost 1.64 requires CMake 3.8 or newer.
+Boost 1.65 and 1.65.1 require CMake 3.9.3 or newer.
+Boost 1.66 requires CMake 3.11 or newer.
+Boost 1.67 is only supported by CMake master since March 2018.
+
++ on orlando's local computer
+
+1. generate makefile
+```bash
+$ cmake -DBoost_INCLUDE_DIRS=/usr/local/opt/boost/icnlude -DBoost_LIBRARIES=/usr/local/opt/boost-python3/lib:/usr/local/opt/boost/lib  -DPYTHON_LIBRARY=~/miniconda3/lib/libpython3.6m.dylib -DPYTHON_INCLUDE_DIR=~/miniconda3/include/python3.6m
+```
+
+2. build
+
+```bash
+$ make
+```
+refer to : https://stackoverflow.com/questions/15929566/need-help-getting-started-with-boost-python
+
+issue:
+  "vtable for boost::python::objects::py_function_impl_base", referenced from:
+      boost::python::objects::py_function_impl_base::py_function_impl_base() in hello.cpp.o
+  NOTE: a missing vtable usually means the first non-inline virtual member function has no definition.
