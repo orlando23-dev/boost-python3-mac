@@ -22,7 +22,7 @@ ENABLE_TESTING()
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
 LINK_LIBRARIES(${Boost_LIBRARIES} ${PYTHON_LIBRARIES}) # Deprecated but so convenient!
 
-set(CMAKE_EXE_LINKER_FLAGS "-lboost_system -lboost_python36 -lpython3.6m")
+# set(CMAKE_EXE_LINKER_FLAGS "-lboost_system -lboost_python36 -lpython3.6m")
 
 ADD_SUBDIRECTORY(01-HelloWorld)
 ADD_SUBDIRECTORY(02-ExposingClasses)
